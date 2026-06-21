@@ -1,10 +1,887 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>我的项目主页</title>
-</head>
-<body>
-    <h1>欢迎来到我的项目！</h1>
-    <p>这是 GitHub Pages 项目主页。</p>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRPIO | Reasoning-Based Video Editing</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --paper: #ffffff;
+        --soft: #f6f8f5;
+        --soft-blue: #eef5f8;
+        --ink: #172026;
+        --muted: #60707a;
+        --line: #dce5e0;
+        --green: #2f7d68;
+        --gold: #bc7a28;
+        --blue: #376f91;
+        --shadow: 0 16px 48px rgba(23, 32, 38, 0.08);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+        line-height: 1.58;
+        font-size: 16px;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .hero {
+        min-height: 92vh;
+        display: grid;
+        align-items: center;
+        padding: 88px 24px 48px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 248, 245, 0.94)),
+          radial-gradient(circle at 18% 22%, rgba(47, 125, 104, 0.14), transparent 32%),
+          radial-gradient(circle at 82% 12%, rgba(188, 122, 40, 0.12), transparent 30%);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero-inner {
+        width: min(1120px, 100%);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 10px;
+        padding: 7px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--green);
+        background: rgba(255, 255, 255, 0.76);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+
+      h1 {
+        margin: 18px 0 18px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(3rem, 8vw, 7rem);
+        line-height: 0.92;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 870px;
+        margin: 0;
+        color: #334148;
+        font-size: clamp(1.1rem, 2vw, 1.45rem);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 10px 18px;
+        border-radius: 6px;
+        border: 1px solid var(--ink);
+        background: var(--ink);
+        color: #fff;
+        font-weight: 800;
+        font-size: 0.88rem;
+        text-decoration: none;
+      }
+
+      .btn.secondary {
+        background: #fff;
+        color: var(--ink);
+        border-color: var(--line);
+      }
+
+      .hero-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .strip-item {
+        min-height: 126px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      .strip-kicker {
+        color: var(--muted);
+        font-size: 0.74rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .strip-title {
+        margin-top: 10px;
+        font-size: 1.15rem;
+        font-weight: 900;
+      }
+
+      .page-section {
+        width: min(1120px, 100%);
+        margin: 0 auto;
+        padding: 76px 24px;
+      }
+
+      .page-section.wide {
+        width: min(1380px, 100%);
+      }
+
+      .section-heading {
+        margin-bottom: 30px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .section-heading p {
+        max-width: 860px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.04rem;
+      }
+
+      .abstract {
+        display: grid;
+        grid-template-columns: 0.38fr 1fr;
+        gap: 34px;
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--soft);
+      }
+
+      .abstract strong {
+        color: var(--green);
+      }
+
+      .figure-block {
+        margin-top: 26px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        overflow: hidden;
+        box-shadow: 0 12px 34px rgba(23, 32, 38, 0.055);
+      }
+
+      .figure-block img {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+
+      .figure-caption {
+        padding: 14px 18px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .dataset-grid {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .stat-card {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .stat-value {
+        color: var(--green);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .stat-label {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .benchmark-table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .benchmark-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 760px;
+        font-size: 0.94rem;
+      }
+
+      .benchmark-table th,
+      .benchmark-table td {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .benchmark-table th {
+        color: #34434a;
+        background: var(--soft);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .benchmark-table tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .benchmark-table .best {
+        color: var(--green);
+        font-weight: 900;
+      }
+
+      .benchmark-note {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .pipeline {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .stage {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .stage-number {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--soft-blue);
+        color: var(--blue);
+        font-weight: 900;
+      }
+
+      .stage h3 {
+        margin: 18px 0 8px;
+        font-size: 1.25rem;
+      }
+
+      .stage p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .case-grid {
+        display: grid;
+        gap: 28px;
+      }
+
+      .case-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 12px 34px rgba(23, 32, 38, 0.055);
+        overflow: hidden;
+      }
+
+      .case-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        align-items: start;
+        padding: 22px 24px;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(90deg, #fff, var(--soft));
+      }
+
+      .case-tag {
+        display: inline-flex;
+        width: fit-content;
+        padding: 4px 9px;
+        border-radius: 4px;
+        color: #fff;
+        background: var(--green);
+        font-size: 0.72rem;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .case-head h3 {
+        margin: 10px 0 8px;
+        font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+        line-height: 1.2;
+      }
+
+      .prompt {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .case-index {
+        color: rgba(23, 32, 38, 0.12);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 4rem;
+        line-height: 0.9;
+        font-weight: 700;
+      }
+
+      .case-body {
+        display: grid;
+        grid-template-columns: minmax(230px, 1fr) minmax(260px, 0.95fr) minmax(230px, 1fr);
+        gap: 1px;
+        background: var(--line);
+      }
+
+      .panel {
+        min-width: 0;
+        padding: 20px;
+        background: #fff;
+      }
+
+      .panel.reasoning {
+        background: #fbfcfa;
+      }
+
+      .panel-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 12px;
+        color: var(--muted);
+        font-size: 0.74rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .pill {
+        padding: 3px 7px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--blue);
+        background: #fff;
+        font-size: 0.68rem;
+      }
+
+      video {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        border-radius: 6px;
+        background: #eef1ee;
+      }
+
+      .reasoning-list {
+        margin: 0;
+        padding-left: 18px;
+        color: #394850;
+      }
+
+      .reasoning-list li + li {
+        margin-top: 10px;
+      }
+
+      .instruction {
+        margin-top: 18px;
+        padding: 14px;
+        border-left: 3px solid var(--gold);
+        border-radius: 4px;
+        background: #fff9f0;
+        color: #5a4530;
+        font-size: 0.93rem;
+      }
+
+      .result-note {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .footer {
+        padding: 42px 24px 60px;
+        border-top: 1px solid var(--line);
+        text-align: center;
+        color: var(--muted);
+        background: var(--soft);
+      }
+
+      @media (max-width: 980px) {
+        .hero-strip,
+        .pipeline,
+        .abstract,
+        .dataset-grid,
+        .case-body {
+          grid-template-columns: 1fr;
+        }
+
+        .case-head {
+          grid-template-columns: 1fr;
+        }
+
+        .case-index {
+          display: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hero {
+          min-height: auto;
+          padding-top: 54px;
+        }
+
+        .page-section {
+          padding: 54px 18px;
+        }
+
+        .abstract,
+        .stat-card,
+        .stage,
+        .case-head,
+        .panel {
+          padding: 18px;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">Text-to-Video Reasoning and Editing</div>
+          <h2>Self-Reflective Video Generation Paradigm (SRP)</h2>
+          <p class="subtitle">
+            We propose the Self-Reflective Video Generation Paradigm (SRP), which employs a Vision-Language Model as a judge to evaluate and iteratively refine video logic, constructs the SP-Pile dataset to train the unified model Uni-SG, and integrates generation, reflection, and editing into an end-to-end framework, significantly improving both reasoning correctness and visual quality.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#cases">View Cases</a>
+            <a class="btn secondary" href="#">Paper</a>
+            <a class="btn secondary" href="#">Code</a>
+            <a class="btn secondary" href="#">Model</a>
+            <a class="btn secondary" href="#">Dataset</a>
+          </div>
+        </div>
+
+        <div class="hero-strip" aria-label="Three-stage workflow">
+          <div class="strip-item">
+            <div class="strip-kicker">Stage 01</div>
+            <div class="strip-title">T2V generation</div>
+          </div>
+          <div class="strip-item">
+            <div class="strip-kicker">Stage 02</div>
+            <div class="strip-title">Reasoning diagnosis</div>
+          </div>
+          <div class="strip-item">
+            <div class="strip-kicker">Stage 03</div>
+            <div class="strip-title">Reasoning-based editing</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-section" id="overview">
+        <div class="section-heading">
+          <h2>Overview</h2>
+          <p>
+            We introduce the Self-Reflective Video Generation Paradigm (SRP), an iterative generate, reflect, and revise pipeline for reasoning-intensive video generation. SRP uses a Vision-Language Model as a judge to inspect the generated video, produce structured reflective editing instructions, and guide targeted video revision.
+          </p>
+        </div>
+        <div class="abstract">
+          <div>
+            <div class="eyebrow">Method</div>
+          </div>
+          <p>
+            Existing DiT-based video generation models operate as parallel feed-forward denoisers, making it difficult to backtrack and correct reasoning failures after generation. SRP closes this gap by decomposing reasoning video generation into <strong>T2V generation</strong>, <strong>reflection and instruction</strong>, and <strong>reasoning-based editing</strong>. Built on SP-Pile, Uni-RG unifies generation, reflection, and instruction-driven editing in one end-to-end model.
+          </p>
+        </div>
+        <div class="figure-block">
+          <img src="video/model.jpg" alt="SRP and Uni-RG model overview" />
+          <div class="figure-caption">Overview of the SRP pipeline and Uni-RG model architecture for self-reflective video generation.</div>
+        </div>
+      </section>
+
+      <section class="page-section wide" id="dataset">
+        <div class="section-heading">
+          <h2>Dataset</h2>
+          <p>
+            To teach video models how to reflect and revise, we construct the Self-Reflective Pile (SP-Pile), a dataset of reasoning-aligned generation, reflection, and revision examples.
+          </p>
+        </div>
+
+        <div class="figure-block">
+          <img src="video/totgpile.jpg" alt="SP-Pile dataset construction pipeline" />
+          <div class="figure-caption">SP-Pile construction pipeline: reasoning knowledge acquisition, dual-granularity prompt generation, teacher-student video generation, and reasoning-chain filtering.</div>
+        </div>
+
+      </section>
+
+      <section class="page-section wide" id="benchmark">
+        <div class="section-heading">
+          <h2>Benchmark</h2>
+          <p>
+            Uni-RG under SRP is evaluated on Rule-Bench and VideoScience-Bench, comparing against open-source diffusion models and unified video models.
+          </p>
+        </div>
+        <div class="benchmark-table-wrap">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Rule-Bench Science</th>
+                <th>Rule-Bench Hypothetical</th>
+                <th>Rule-Bench Humanity</th>
+                <th>Rule-Bench Overall</th>
+                <th>VideoScience Expected</th>
+                <th>VideoScience Overall</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Wan2.2</td>
+                <td>46.87</td>
+                <td>48.90</td>
+                <td>57.49</td>
+                <td>54.74</td>
+                <td>41.40</td>
+                <td>72.71</td>
+              </tr>
+              <tr>
+                <td>HunyuanVideo 1.5</td>
+                <td>39.97</td>
+                <td>46.80</td>
+                <td>56.70</td>
+                <td>50.72</td>
+                <td>43.12</td>
+                <td>74.30</td>
+              </tr>
+              <tr>
+                <td>OmniWeaving</td>
+                <td>43.16</td>
+                <td class="best">54.98</td>
+                <td>55.58</td>
+                <td>53.11</td>
+                <td>44.38</td>
+                <td>73.75</td>
+              </tr>
+              <tr>
+                <td>UniVideo</td>
+                <td>31.27</td>
+                <td>41.49</td>
+                <td>50.70</td>
+                <td>45.03</td>
+                <td>35.15</td>
+                <td>67.23</td>
+              </tr>
+              <tr>
+                <td><strong>Uni-RG (SRP)</strong></td>
+                <td class="best">51.28</td>
+                <td>53.50</td>
+                <td class="best">63.33</td>
+                <td class="best">57.36</td>
+                <td class="best">52.50</td>
+                <td class="best">76.84</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="benchmark-note">Scores are adapted from the paper tables. Rule-Bench uses checklist scores, while VideoScience-Bench uses VLM-as-Judge scores on the T2V subset.</p>
+      </section>
+
+      <!-- <section class="page-section" id="pipeline">
+        <div class="section-heading">
+          <h2>Pipeline</h2>
+          <p>The workflow keeps the visual evidence, model reasoning, and final correction visible together so that each improvement can be traced back to a concrete diagnosis.</p>
+        </div>
+        <div class="pipeline">
+          <article class="stage">
+            <div class="stage-number">1</div>
+            <h3>T2V</h3>
+            <p>Generate an initial video directly from the text prompt. This output provides the baseline visual evidence for review.</p>
+          </article>
+          <article class="stage">
+            <div class="stage-number">2</div>
+            <h3>Reasoning</h3>
+            <p>Analyze whether the video satisfies the prompt, with attention to semantics, temporal progression, emotion, environment, and physics.</p>
+          </article>
+          <article class="stage">
+            <div class="stage-number">3</div>
+            <h3>Reasoning-Based Editing</h3>
+            <p>Turn the diagnosis into explicit edit instructions and produce a corrected final video.</p>
+          </article>
+        </div>
+      </section> -->
+
+      <section class="page-section wide" id="cases">
+        <div class="section-heading">
+          <h2>Showcases</h2>
+          <p>For each example, the left video is the original T2V output, the center panel summarizes the reasoning and edit direction, and the right video is the reasoning-based edited result.</p>
+        </div>
+
+        <div class="case-grid">
+          <article class="case-card">
+            <div class="case-head">
+              <div>
+                <span class="case-tag">Biology / Science</span>
+                <h3>Nitrogen-deficient corn plant over time</h3>
+                <p class="prompt">Prompt: A potted corn plant grown in soil lacking nitrogen. Observe the leaves over several months.</p>
+              </div>
+              <div class="case-index">01</div>
+            </div>
+            <div class="case-body">
+              <div class="panel">
+                <div class="panel-label"><span>T2V</span><span class="pill">baseline</span></div>
+                <video controls muted preload="metadata">
+                  <source src="video/biology_science_2_final.mp4" type="video/mp4" />
+                </video>
+                <p class="result-note">The plant remains too healthy and green for a nitrogen-deficiency scenario.</p>
+              </div>
+              <div class="panel reasoning">
+                <div class="panel-label"><span>Reasoning</span><span class="pill">diagnosis</span></div>
+                <ul class="reasoning-list">
+                  <li>The leaves lack yellowing, chlorosis, and gradual stress symptoms.</li>
+                  <li>The stem and overall plant structure look too vigorous.</li>
+                  <li>The expected lower-leaf deterioration is not visible.</li>
+                </ul>
+                <div class="instruction">Editing direction: dull the leaf color, add yellowing patches, weaken the stem, curl or thin leaves, and emphasize lower foliage decline over time.</div>
+              </div>
+              <div class="panel">
+                <div class="panel-label"><span>Reasoning-Based Editing</span><span class="pill">final</span></div>
+                <video controls muted preload="metadata">
+                  <source src="video/biology_science_2.mp4" type="video/mp4" />
+                </video>
+                <p class="result-note">The final video targets visible nitrogen-depletion symptoms and a clearer temporal health decline.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="case-card">
+            <div class="case-head">
+              <div>
+                <span class="case-tag">Emotion / Humanity</span>
+                <h3>Hearing a funny story from a friend</h3>
+                <p class="prompt">Prompt: A person hears a very funny story told by a friend.</p>
+              </div>
+              <div class="case-index">02</div>
+            </div>
+            <div class="case-body">
+              <div class="panel">
+                <div class="panel-label"><span>T2V</span><span class="pill">baseline</span></div>
+                <video controls muted preload="metadata">
+                  <source src="video/emotion_humanity_1.mp4" type="video/mp4" />
+                </video>
+                <p class="result-note">The interaction is present, but the listener's emotional reaction stays too neutral.</p>
+              </div>
+              <div class="panel reasoning">
+                <div class="panel-label"><span>Reasoning</span><span class="pill">diagnosis</span></div>
+                <ul class="reasoning-list">
+                  <li>The woman's face remains static instead of shifting from attention to amusement.</li>
+                  <li>There is little smiling, laughing, leaning, or relaxed body language.</li>
+                  <li>The expected reaction arc is missing.</li>
+                </ul>
+                <div class="instruction">Editing direction: animate a gradual response from attentive listening to smile, laughter, lifted brows, brightened eyes, and warmer body language.</div>
+              </div>
+              <div class="panel">
+                <div class="panel-label"><span>Reasoning-Based Editing</span><span class="pill">final</span></div>
+                <video controls muted preload="metadata">
+                  <source src="video/emotion_humanity_1_final.mp4" type="video/mp4" />
+                </video>
+                <p class="result-note">The edited result is designed to make the emotional progression readable.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="case-card">
+            <div class="case-head">
+              <div>
+                <span class="case-tag">Emotion / Humanity</span>
+                <h3>Teacher praises a student's assignment</h3>
+                <p class="prompt">Prompt: A student in the classroom is being praised by the teacher for completing their assignment exceptionally well.</p>
+              </div>
+              <div class="case-index">03</div>
+            </div>
+            <div class="case-body">
+              <div class="panel">
+                <div class="panel-label"><span>T2V</span><span class="pill">baseline</span></div>
+                <video controls muted preload="metadata">
+                  <source src="video/emotion_humanity_4.mp4" type="video/mp4" />
+                </video>
+                <p class="result-note">The classroom scene is recognizable, but praise and celebration are understated.</p>
+              </div>
+              <div class="panel reasoning">
+                <div class="panel-label"><span>Reasoning</span><span class="pill">diagnosis</span></div>
+                <ul class="reasoning-list">
+                  <li>The teacher's approving gesture is not strong enough.</li>
+                  <li>The praised student shows limited satisfaction or joy.</li>
+                  <li>Nearby classmates remain passive, weakening the classroom atmosphere.</li>
+                </ul>
+                <div class="instruction">Editing direction: strengthen the teacher's presentation gesture, add a proud student smile, and increase classmate engagement through smiles, laughter, or clapping.</div>
+              </div>
+              <div class="panel">
+                <div class="panel-label"><span>Reasoning-Based Editing</span><span class="pill">final</span></div>
+                <video controls muted preload="metadata">
+                  <source src="video/emotion_humanity_4_final.mp4" type="video/mp4" />
+                </video>
+                <p class="result-note">The final video aims for a warmer, more socially legible praise moment.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="case-card">
+            <div class="case-head">
+              <div>
+                <span class="case-tag">Objective Change / Hypothetical</span>
+                <h3>Summer and winter are swapped</h3>
+                <p class="prompt">Prompt: Assume winter and summer are swapped — in a normally cold winter city, people walk outside.</p>
+              </div>
+              <div class="case-index">04</div>
+            </div>
+            <div class="case-body">
+              <div class="panel">
+                <div class="panel-label"><span>T2V</span><span class="pill">baseline</span></div>
+                <video controls muted preload="metadata">
+                  <source src="video/objective_change_hypothetical_2.mp4" type="video/mp4" />
+                </video>
+                <p class="result-note">The city stays visually winter-like, with snow, ice, and cool lighting.</p>
+              </div>
+              <div class="panel reasoning">
+                <div class="panel-label"><span>Reasoning</span><span class="pill">diagnosis</span></div>
+                <ul class="reasoning-list">
+                  <li>The prompt requires a counterfactual seasonal swap.</li>
+                  <li>Snowy ground and cold-toned skies still imply ordinary winter.</li>
+                  <li>Greenery, sunlight, and warm summer cues are absent.</li>
+                </ul>
+                <div class="instruction">Editing direction: remove snow and ice, add grass, trees, shrubs, warm sunlight, a brighter sky, and a more vibrant summer color temperature.</div>
+              </div>
+              <div class="panel">
+                <div class="panel-label"><span>Reasoning-Based Editing</span><span class="pill">final</span></div>
+                <video controls muted preload="metadata">
+                  <source src="video/objective_change_hypothetical_2_final.mp4" type="video/mp4" />
+                </video>
+                <p class="result-note">The final video focuses on making the swapped-season premise visible.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="case-card">
+            <div class="case-head">
+              <div>
+                <span class="case-tag">Objective Change / Hypothetical</span>
+                <h3>Gravity acts vertically upward</h3>
+                <p class="prompt">Prompt: Assume gravity acts vertically upward — on a school playground, a student throws a basketball.</p>
+              </div>
+              <div class="case-index">05</div>
+            </div>
+            <div class="case-body">
+              <div class="panel">
+                <div class="panel-label"><span>T2V</span><span class="pill">baseline</span></div>
+                <video controls muted preload="metadata">
+                  <source src="video/objective_change_hypothetical_3.mp4" type="video/mp4" />
+                </video>
+                <p class="result-note">The basketball motion reads like normal gravity rather than an upward-force world.</p>
+              </div>
+              <div class="panel reasoning">
+                <div class="panel-label"><span>Reasoning</span><span class="pill">diagnosis</span></div>
+                <ul class="reasoning-list">
+                  <li>The ball does not clearly rise upward after being thrown.</li>
+                  <li>The camera does not track the ascent into the sky.</li>
+                  <li>The scene lacks the visual surrealism expected from reversed gravity.</li>
+                </ul>
+                <div class="instruction">Editing direction: send the basketball upward toward the clouds, tilt or track the camera with the ascent, and let the environment reinforce the reversed-gravity direction.</div>
+              </div>
+              <div class="panel">
+                <div class="panel-label"><span>Reasoning-Based Editing</span><span class="pill">final</span></div>
+                <video controls muted preload="metadata">
+                  <source src="video/objective_change_hypothetical_3_final.mp4" type="video/mp4" />
+                </video>
+                <p class="result-note">The edited output is structured around a more explicit upward trajectory.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      SRPIO · Text-to-Video Reasoning and Reasoning-Based Editing Showcase
+    </footer>
+  </body>
 </html>
